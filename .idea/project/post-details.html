@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+</body>
+<script>
+
+    let postID = new URL(location.href).searchParams.get('id')
+    console.log(postID)
+
+    let baseURL = `https://jsonplaceholder.typicode.com/posts/${postID}`
+    fetch(baseURL)
+        .then(value => value.json())
+        .then(post => {
+
+
+            let block = document.createElement('div')
+            document.body.appendChild(block)
+            let h1 = document.createElement('h1')
+            h1.innerText = `ID: ${post.id}
+            Title: ${post.title} `
+            let p = document.createElement('p')
+            p.innerText = `${post.body}`
+
+            block.append(h1, p)
+
+
+            console.log(post)
+
+
+            let commentsURL = `https://jsonplaceholder.typicode.com/posts/${postID}/comments`
+            fetch(commentsURL)
+                .then(value => value.json())
+                .then(comments => {
+
+                    for (const comment of comments) {
+
+                        let commentBlock = document.createElement('div')
+                        document.body.appendChild(commentBlock)
+                        let h1 = document.createElement('h1')
+                        h1.innerText = `id: ${comment.id}
+                        name: ${comment.name}
+                        email: ${comment.email}
+                        body: ${comment.body}`
+                        commentBlock.append(h1)
+
+
+                    }
+
+
+                })
+        })
+
+
+</script>
+</html>
