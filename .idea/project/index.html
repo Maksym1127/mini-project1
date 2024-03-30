@@ -12,7 +12,7 @@
     html {
         margin: 0;
         padding: 0;
-        background-color: darkcyan;
+
         display: flex;
         align-items: center;
         justify-content: center;
@@ -23,7 +23,7 @@
         justify-content: center;
         font-size: 40px;
         font-weight: bolder;
-        text-shadow: #000 1px 0 0px, #000 0 1px 0px, #000 -1px 0 0px, #000 0 -1px 0px;
+        /*text-shadow: #000 1px 0 0px, #000 0 1px 0px, #000 -1px 0 0px, #000 0 -1px 0px;*/
 
     }
 
@@ -39,7 +39,7 @@
     }
 
     .block {
-        background-color: lightgoldenrodyellow;
+        background-color: #e7e7e7;
         color: black;
 
         border: 4px black solid;
@@ -49,7 +49,9 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        font-family: Arial;
 
+        font-size: 15px;
         width: 400px;
         height: 150px;
         padding: 10px;
@@ -58,14 +60,21 @@
     }
 
     .button {
-        background-color: rgba(0,110,165,0.67);
-        color: black;
+        background-color: #101210a8;
+        color: white;
         font-weight: bold;
-
+        font-size: 17px;
+        font-family: Arial;
         border: 2px black solid;
         width: 100px;
         height: 35px;
-        border-radius: 10%;
+        border-radius: 20%;
+    }
+    .button:hover{
+        transition: all .5s linear;
+        text-decoration: none;
+        background-color: rgba(16, 18, 16, 0.80)
+
     }
 </style>
 <body>
@@ -102,7 +111,7 @@
                 a.href = `user-details.html?id=${user.id}`
                 let button = document.createElement('button')
                 button.classList.add('button')
-                button.innerText = 'details'
+                button.innerText = 'Details'
                 a.appendChild(button)
                 block.append(h1, a)
 

@@ -7,12 +7,58 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+<style>
+
+    body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center
+    }
+    .title {
+        display: flex;
+        justify-content: center;
+        font-size: 40px;
+        font-weight: bolder;
+        text-shadow: #000 1px 0 0px, #000 0 1px 0px, #000 -1px 0 0px, #000 0 -1px 0px;
+
+    }
+
+.block{
+
+
+}
+    .main {
+        display: flex;
+        flex-wrap: wrap;
+        width: 1400px;
+        align-items: center;
+        justify-content: center;
+
+    }
+    .commentBlock{
+        width: 300px;
+        height: 300px;
+        font-size: 12px;
+        border: 2px red solid;
+        margin: 10px;
+        padding-left: 10px;
+    }
+</style>
+
 
 <body>
 
 
 </body>
 <script>
+
+    let title = document.createElement('div')
+    title.innerText = `POST-Details`
+    title.classList.add('title')
+
+    document.body.appendChild(title)
 
     let postID = new URL(location.href).searchParams.get('id')
     console.log(postID)
@@ -26,8 +72,8 @@
             let block = document.createElement('div')
             document.body.appendChild(block)
             let h1 = document.createElement('h1')
-            h1.innerText = `ID: ${post.id}
-            Title: ${post.title} `
+            h1.innerText = `Post ID: ${post.id}
+            ${post.title} `
             let p = document.createElement('p')
             p.innerText = `${post.body}`
 
@@ -41,17 +87,23 @@
             fetch(commentsURL)
                 .then(value => value.json())
                 .then(comments => {
-
+                    let main = document.createElement('div')
+                    main.classList.add('main')
+                    document.body.appendChild(main)
                     for (const comment of comments) {
 
                         let commentBlock = document.createElement('div')
-                        document.body.appendChild(commentBlock)
-                        let h1 = document.createElement('h1')
-                        h1.innerText = `id: ${comment.id}
+                        commentBlock.classList.add('commentBlock')
+                        main.appendChild(commentBlock)
+
+                        let h2 = document.createElement('h2')
+
+                        h2.innerText = `
+                        id: ${comment.id}
                         name: ${comment.name}
                         email: ${comment.email}
                         body: ${comment.body}`
-                        commentBlock.append(h1)
+                        commentBlock.append(h2)
 
 
                     }

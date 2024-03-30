@@ -10,23 +10,23 @@
 
 <style>
 
+    html {
+        margin: 0;
+        padding: 0;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     .title {
         display: flex;
         justify-content: center;
         font-size: 40px;
         font-weight: bolder;
-        text-shadow: #000 1px 0 0px, #000 0 1px 0px, #000 -1px 0 0px, #000 0 -1px 0px;
+        /*text-shadow: #000 1px 0 0px, #000 0 1px 0px, #000 -1px 0 0px, #000 0 -1px 0px;*/
 
     }
 
-    html {
-        margin: 0;
-        padding: 0;
-        background-color: lightblue;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
 
     body {
         width: 100%;
@@ -41,46 +41,60 @@
     .main {
         width: 600px;
         /*border: 10px red solid;*/
+
     }
 
     .info {
-        background-color: lightseagreen;
+        background-color: #e7e7e7;
         font-size: 30px;
         font-weight: bolder;
+
         margin: 10px;
         padding-left: 20px;
-        border-radius: 15px;
+
+        border-radius: 20px;
+        border: 2px black solid;
         /*border-bottom-left-radius: 10px;*/
+        width: 400px;
 
     }
 
     .address {
-        background-color: lightgray;
+
+        text-align: center;
+        background-color: #bdbdbd;
         font-size: 35px;
         font-weight: bold;
         margin: 10px 5px 0 5px;
-        padding-left: 20px;
 
-        border-radius: 15px;
+
+        border-radius: 10px;
 
     }
 
     .adr-comp {
-        background-color: lightslategray;
+        background-color: #e7e7e7;;
         font-size: 30px;
         font-weight: bolder;
-        margin: 10px 10px 10px 20px;
-        padding-left: 10px;
-        border-radius: 10px;
+        margin: 10px 10px 10px 40px;
+        padding-left: 20px;
+        border-radius: 20px;
+        border: 2px black solid;
+        width: 400px;
+
     }
 
     .geo {
-        background-color: lightskyblue;
+        background-color: #e7e7e7;;
         font-size: 20px;
         font-weight: bold;
-        border-radius: 10px;
-        padding-left: 10px;
-        margin: 10px 10px 10px 30px
+        border: 2px black solid;
+        border-radius: 20px;
+        padding-left: 20px;
+        margin: 10px 10px 10px 60px;
+        width: 300px;
+
+
     }
 
     .button {
@@ -95,13 +109,19 @@
         border-radius: 10px;
     }
 
+    .button:hover{
+        transition: all .5s linear;
+        text-decoration: none;
+        background-color: rgba(0, 110, 165, 0.85);
+
+    }
     .posts{
         display: flex;
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
         width: 1200px;
-        border: 2px black solid;
+        /*border: 2px black solid;*/
     }
 
     .block{
@@ -109,8 +129,12 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+
+        background-color: rgba(231, 231, 231, 1);
+
         margin: 10px;
-        border: 5px black solid;
+        border: 2px black solid;
+        border-radius: 10%;
         width: 200px;
         height: 150px;
 
@@ -119,7 +143,25 @@
 
     }
 
+    .button2 {
+        background-color: rgba(0,110,165,0.67);
+        color: black;
+        font-weight: bold;
 
+        border: 2px black solid;
+        width: 100px;
+        height: 35px;
+        border-radius: 10%;
+        margin-top: 10px;
+        position: relative;
+
+    }
+    .button2:hover{
+        transition: all .5s linear;
+        text-decoration: none;
+        background-color: rgba(0, 110, 165, 0.85);
+
+    }
 </style>
 
 
@@ -158,7 +200,7 @@
                     div.classList.add('address')
                     main.appendChild(div)
 
-                    div.innerText = `${resultKey}:`
+                    div.innerText = `${resultKey}`
 
                     for (const key in data[resultKey]) {
 
@@ -193,9 +235,13 @@
                     div.classList.add('info')
                     main.appendChild(div)
                     div.innerText = `${resultKey} - ${data[resultKey]}`
+                    console.log(div)
                 }
 
             }
+            let infos = document.body.getElementsByClassName('info')
+            console.log(infos)
+
 
 
             let button = document.createElement('button')
@@ -221,6 +267,7 @@
                             let a = document.createElement('a')
                             a.href = `post-details.html?id=${post.id}`
                             let button = document.createElement('button')
+                            button.classList.add('button2')
                             button.innerText = 'Details'
                             a.appendChild(button)
                             block.append(a)
