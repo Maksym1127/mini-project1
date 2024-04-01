@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="user.css">
 </head>
 <body>
-<a href="index.html"> <button>BACK</button> </a>
+<!--<a href="index.html">-->
+<!--    <button>BACK</button>-->
+<!--</a>-->
 
 <script>
     let title = document.createElement('div')
@@ -20,6 +22,8 @@
     let userID = new URL(location.href).searchParams.get('id')
     console.log(userID)
     let baseURL = `https://jsonplaceholder.typicode.com/users/` + userID;
+    const props = ["id", "name", "username", "email", "phone", "website", "address", "company" ];
+
     fetch(baseURL)
         .then(value => value.json())
         .then(data => {
@@ -28,74 +32,75 @@
             main.classList.add('main')
             document.body.appendChild(main)
             console.log(data)
-            for (const resultKey in data) {
-                if (resultKey === "address" || resultKey === "company") {
+
+            for (let i = 0; i < props.length; i++) {
+
+                if (props[i] === "address" || props[i] === "company") {
                     let div = document.createElement('div');
                     div.classList.add('address')
-                    div.innerText = `${resultKey}`
+                    div.innerText = `${props[i]}`
                     main.appendChild(div)
 
-                    for (const key in data[resultKey]) {
+                    for (const key in data[props[i]]) {
+                        let div = document.createElement('div');
+                        div.classList.add('adr-comp');
+                        div.innerText = key === "geo" ?
+                            `${key}:` :
+                            `${key} - ${data[props[i]][key]}`;
+                        main.appendChild(div);
 
                         if (key === "geo") {
-                            let div = document.createElement('div');
-                            div.classList.add('adr-comp')
-                            div.innerText = `${key}:`
-                            main.appendChild(div)
-
-                            for (const pKey in data[resultKey][key]) {
-
+                            for (const pKey in data[props[i]][key]) {
                                 let div = document.createElement('div');
-                                div.classList.add('geo')
-                                div.innerText = `${pKey}:  ${data[resultKey][key][pKey]}`
-                                main.appendChild(div)
+                                div.classList.add('geo');
+                                div.innerText = `${pKey}:  ${data[props[i]][key][pKey]}`;
+                                main.appendChild(div);
                             }
-                        } else {
-                            let div = document.createElement('div');
-                            div.classList.add('adr-comp')
-                            div.innerText = `${key} - ${data[resultKey][key]}`
-                            main.appendChild(div)
                         }
                     }
-
                 } else {
                     let div = document.createElement('div');
                     div.classList.add('info')
-                    div.innerText = `${resultKey} - ${data[resultKey]}`
+                    div.innerText = `${props[i]} - ${data[props[i]]}`
                     main.appendChild(div)
                 }
             }
+
             let button = document.createElement('button')
             button.innerText = 'post of current user'
             button.classList.add('button')
 
             let flag = false;
             button.addEventListener('click', function () {
-                if (!flag){
-                let postsURL = `https://jsonplaceholder.typicode.com/users/${userID}/posts`
-                fetch(postsURL)
-                    .then(value => value.json())
-                    .then(posts => {
-                        let div = document.createElement('div');
-                        div.classList.add('posts')
-                        document.body.appendChild(div)
+                if (!flag) {
+                    let postsURL = `https://jsonplaceholder.typicode.com/users/${userID}/posts`
+                    fetch(postsURL)
+                        .then(value => value.json())
+                        .then(posts => {
+                            let div = document.createElement('div');
+                            div.classList.add('posts')
+                            document.body.appendChild(div)
 
-                        for (const post of posts) {
-                            let block = document.createElement('div')
-                            block.classList.add('block')
-                            div.appendChild(block)
-                            block.innerText = `${post.title}`
+                            for (const post of posts) {
+                                let block = document.createElement('div')
+                                block.classList.add('block')
+                                div.appendChild(block)
+                                let pDiv = document.createElement('div')
+                                pDiv.innerText = `${post.title}`
+                                pDiv.classList.add('pDiv');
+                                let bDiv = document.createElement('div')
+                                bDiv.classList.add('bDiv')
+                                let button = document.createElement('button')
+                                button.classList.add('button2')
+                                button.innerText = 'Details'
+                                bDiv.appendChild(button)
 
-                            let button = document.createElement('button')
-                            button.classList.add('button2')
-                            button.innerText = 'Details'
-
-                                button.onclick = function() {
-                                window.location.href = `post-details.html?id=${post.id}`;
+                                button.onclick = function () {
+                                    window.location.href = `post-details.html?id=${post.id}`;
+                                }
+                                block.append(pDiv, bDiv)
                             }
-                            block.append(button)
-                        }
-                    })
+                        })
                     flag = true;
                 }
             })
