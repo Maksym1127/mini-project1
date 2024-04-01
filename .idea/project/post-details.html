@@ -18,9 +18,9 @@
 
     let postID = new URL(location.href).searchParams.get('id')
     let commentsURL = `https://jsonplaceholder.typicode.com/posts/${postID}/comments`;
-    // console.log(postID)
-
+    // console.log(postID)  https://jsonplaceholder.typicode.com/posts/1/comments
     let baseURL = `https://jsonplaceholder.typicode.com/posts/${postID}`
+
     async function fetchData() {
         try {
             const [postResponse, commentsResponse] = await Promise.all([
@@ -33,11 +33,11 @@
             let block = document.createElement('div');
             document.body.appendChild(block);
             block.classList.add('block');
-            let h1 = document.createElement('h1');
 
+            let h1 = document.createElement('h1');
             h1.innerText = `User ID: ${post.userId}
-               Post ID: ${post.id}
-               ${post.title} `;
+                            Post ID: ${post.id}
+                            ${post.title} `;
 
             let p = document.createElement('p');
             p.innerText = `${post.body}`;
@@ -63,9 +63,7 @@
             console.error('Error:', error);
         }
     }
-
     fetchData();
-
 </script>
 </body>
 </html>

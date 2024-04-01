@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="user.css">
 </head>
 <body>
-<!--<a href="index.html">-->
-<!--    <button>BACK</button>-->
-<!--</a>-->
 
 <script>
     let title = document.createElement('div')
@@ -22,7 +19,7 @@
     let userID = new URL(location.href).searchParams.get('id')
     console.log(userID)
     let baseURL = `https://jsonplaceholder.typicode.com/users/` + userID;
-    const props = ["id", "name", "username", "email", "phone", "website", "address", "company" ];
+    const props = ["id", "name", "username", "email", "phone", "website", "address", "company"];
 
     fetch(baseURL)
         .then(value => value.json())
@@ -65,7 +62,6 @@
                     main.appendChild(div)
                 }
             }
-
             let button = document.createElement('button')
             button.innerText = 'post of current user'
             button.classList.add('button')
